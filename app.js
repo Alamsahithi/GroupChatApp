@@ -56,7 +56,10 @@ initializeSocketIO(io);
 const port = process.env.PORT;
 
 sequelize
-  .sync({ force: true })
-  .then(() => )
+  .sync({ alter: true })
+  .then(() => {
+    console.log("Database connected");
+    return httpServer.listen(8080);
+  })
   .then(() => console.log(`Server running on port ${port}`))
   .catch((error) => console.log(error));
